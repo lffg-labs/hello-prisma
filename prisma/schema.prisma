@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Petition {
+  id String @id @default(uuid()) @db.Uuid
+
+  requesterName String @map("requester_name")
+  subjectName   String @map("subject_name")
+
+  additionalData Json @default("{}") @map("additional_data")
+
+  @@map("petitions")
+}
+
+// POST /users
